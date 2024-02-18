@@ -1,0 +1,12 @@
+node_modules
+.DS_store
+yarn.lock
+*.log
+*.env*
+cjs
+esm
+.npm-debug.log
+tags
+.nyc_output
+coverage
+.idea
