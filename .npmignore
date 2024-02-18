@@ -7,8 +7,5 @@
 !/CHANGELOG.md
 !/LICENSE
 !/README.md
-!/VERSION
 !/package.json
-!/cjs/**/*
-!/esm/**/*
-!/types/**/*
+!/src/**/*
