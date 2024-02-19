@@ -1,0 +1,11 @@
+import { CreateResponse } from "../types/endpoints/create";
+import { CancelResponse } from "../types/endpoints/cancel";
+import { RecurringResponse } from "../types/endpoints/recurring";
+import { RefundResponse } from "../types/endpoints/refund";
+import { CapturePreAuthResponse } from "../types/endpoints/capturePreauth";
+import { CancelPreAuthResponse } from "../types/endpoints/cancelPreauth";
+import { MethodsBadRequestResponse, MethodsSuccessResponse } from "../types/endpoints/methods";
+import { StatusResponse } from "../types/endpoints/status";
+import { HttpStatusCode } from "axios";
+export type URLEnum = '/create' | '/cancel' | '/recurring' | '/refund' | '/capturePreauth' | '/cancelPreauth' | '/methods' | '/status';
+export declare function parseResponse(url: URLEnum, data: any, status: HttpStatusCode): CreateResponse | CancelResponse | RecurringResponse | RefundResponse | CapturePreAuthResponse | CancelPreAuthResponse | MethodsSuccessResponse | MethodsBadRequestResponse | StatusResponse;

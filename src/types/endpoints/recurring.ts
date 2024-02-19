@@ -49,5 +49,3 @@ export type RecurringResponseCode =
     | 1400 // wrong query
     | 1500 // unexpected error
 ;
-
-
