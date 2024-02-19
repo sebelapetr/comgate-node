@@ -2,7 +2,7 @@
   "name": "comgate-node",
   "version": "1.1.0",
   "description": "Comgate Payments API Typescript SDK written in Typescript",
-  "main": "dist/comgate-client.d.ts",
+  "main": "dist/comgate-client.js",
   "scripts": {
     "test": "jest --ci --coverage --passWithNoTests",
     "build": "rimraf dist && tsc -p tsconfig.build.json",
