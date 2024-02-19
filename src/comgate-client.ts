@@ -13,9 +13,10 @@ import { CapturePreAuthRequest, CapturePreAuthResponse } from "./types/endpoints
 import { CancelPreAuthRequest, CancelPreAuthResponse } from "./types/endpoints/cancelPreauth"
 import { MethodsBadRequestResponse, MethodsSuccessResponse, MethodsRequest } from "./types/endpoints/methods";
 import { StatusRequest, StatusResponse } from "./types/endpoints/status";
+import {parseResponse, URLEnum} from "./utils/parse-response";
 
 interface ApiRequest {
-    path: string;
+    path: URLEnum;
     method: HttpMethod;
     headers?: Record<string, string>;
     body?: Record<string, unknown>;
@@ -24,7 +25,7 @@ interface ApiRequest {
 
 export default class ComgateClient {
     private apiBaseUrl = 'https://payments.comgate.cz/'
-    private apiVersion = '1.0'
+    private apiVersion = 'v1.0'
     private readonly merchant: number // E-shop identifier in the ComGate system.
     private readonly secret: string // Password for background communication.
     private readonly test: boolean // 'true' for test payment, 'false' for production. Defaults to 'false'.
@@ -56,11 +57,11 @@ export default class ComgateClient {
 
         try {
             const res = await this.axiosInstance(options);
-            return res.data;
+            return parseResponse(options.url, res.data, res.status) as T;
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 throw new Error(
-                    `Error from Comgate API with status code ${error.response?.status}: ${error.response?.data?.message}`,
+                    `Error from Comgate API with status code ${error.response?.status}: ${error.response?.data?.message ?? error.response?.statusText}`,
                 );
             }
 
@@ -69,7 +70,7 @@ export default class ComgateClient {
     }
 
     // https://apidoc.comgate.cz/?lang=en#create
-    protected create(request: CreateRequest): Promise<CreateResponse> {
+    public create(request: CreateRequest): Promise<CreateResponse> {
         return this.callApi<CreateResponse>
         ({
             path: "/create",
@@ -82,7 +83,7 @@ export default class ComgateClient {
     }
 
     // https://apidoc.comgate.cz/?lang=en#cancel
-    protected cancel(request: CancelRequest): Promise<CancelResponse> {
+    public cancel(request: CancelRequest): Promise<CancelResponse> {
         return this.callApi<CancelResponse>
         ({
             path: "/cancel",
@@ -92,7 +93,7 @@ export default class ComgateClient {
     }
 
     // https://apidoc.comgate.cz/?lang=en#recurring
-    protected recurring(request: RecurringRequest): Promise<RecurringResponse> {
+    public recurring(request: RecurringRequest): Promise<RecurringResponse> {
         return this.callApi<RecurringResponse>
         ({
             path: "/create",
@@ -105,7 +106,7 @@ export default class ComgateClient {
     }
 
     // https://apidoc.comgate.cz/?lang=en#refund
-    protected refund(request: RefundRequest): Promise<RefundResponse> {
+    public refund(request: RefundRequest): Promise<RefundResponse> {
         return this.callApi<RefundResponse>
         ({
             path: "/refund",
@@ -118,7 +119,7 @@ export default class ComgateClient {
     }
 
     // https://apidoc.comgate.cz/?lang=en#capturepreauth
-    protected capturePreauth(request: CapturePreAuthRequest): Promise<CapturePreAuthResponse> {
+    public capturePreauth(request: CapturePreAuthRequest): Promise<CapturePreAuthResponse> {
         return this.callApi<CapturePreAuthResponse>
         ({
             path: "/capturePreauth",
@@ -130,7 +131,7 @@ export default class ComgateClient {
     }
 
     // https://apidoc.comgate.cz/?lang=en#cancelpreauth
-    protected cancelPreauth(request: CancelPreAuthRequest): Promise<CancelPreAuthResponse> {
+    public cancelPreauth(request: CancelPreAuthRequest): Promise<CancelPreAuthResponse> {
         return this.callApi<CancelPreAuthResponse>
         ({
             path: "/cancelPreauth",
@@ -142,7 +143,7 @@ export default class ComgateClient {
     }
 
     // https://apidoc.comgate.cz/?lang=en#methods
-    protected methods(request: MethodsRequest): Promise<MethodsSuccessResponse | MethodsBadRequestResponse> {
+    public methods(request: MethodsRequest): Promise<MethodsSuccessResponse | MethodsBadRequestResponse> {
         return this.callApi<MethodsSuccessResponse | MethodsBadRequestResponse>
         ({
             path: "/methods",
@@ -154,7 +155,7 @@ export default class ComgateClient {
     }
 
     // https://apidoc.comgate.cz/?lang=en#status
-    protected status(request: StatusRequest): Promise<StatusResponse> {
+    public status(request: StatusRequest): Promise<StatusResponse> {
         return this.callApi<StatusResponse>
         ({
             path: "/status",

@@ -1,0 +1,32 @@
+export type CreateRequest = {
+    country?: CreateCountry;
+    price: number;
+    curr: CreateCurr;
+    label: string;
+    refId: string;
+    method: string;
+    account?: string;
+    email: string;
+    name?: string;
+    lang?: CreateLanguage;
+    prepareOnly: boolean;
+    preauth?: boolean;
+    initRecurring?: boolean;
+    verification?: boolean;
+    applePayPayload?: string;
+    expirationTime?: string;
+    dynamicExpiration?: boolean;
+    url_paid?: string;
+    url_cancelled?: string;
+    url_pending?: string;
+};
+export type CreateCountry = 'ALL' | 'AT' | 'BE' | 'CY' | 'CZ' | 'DE' | 'EE' | 'EL' | 'ES' | 'FI' | 'FR' | 'GB' | 'HR' | 'HU' | 'IE' | 'IT' | 'LT' | 'LU' | 'LV' | 'MT' | 'NL' | 'NO' | 'PL' | 'PT' | 'RO' | 'SL' | 'SK' | 'SV' | 'US';
+export type CreateCurr = 'CZK' | 'EUR' | 'PLN' | 'HUF' | 'USD' | 'GBP' | 'RON' | 'HRK' | 'NOK' | 'SEK';
+export type CreateLanguage = 'cs' | 'sk' | 'en' | 'pl' | 'fr' | 'ro' | 'de' | 'hu' | 'si' | 'hr' | 'no' | 'sv';
+export type CreateResponse = {
+    code: CreateResponseCode;
+    message: string;
+    transId?: string;
+    redirect?: string;
+};
+export type CreateResponseCode = 0 | 1100 | 1102 | 1103 | 1104 | 1107 | 1200 | 1301 | 1303 | 1304 | 1305;
