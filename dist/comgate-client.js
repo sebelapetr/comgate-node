@@ -48,11 +48,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var axios_1 = require("axios");
+var parse_response_1 = require("./utils/parse-response");
 var ComgateClient = /** @class */ (function () {
     function ComgateClient(_a) {
         var merchant = _a.merchant, secret = _a.secret, test = _a.test;
         this.apiBaseUrl = 'https://payments.comgate.cz/';
-        this.apiVersion = '1.0';
+        this.apiVersion = 'v1.0';
         this.merchant = merchant;
         this.secret = secret;
         this.test = test;
@@ -64,11 +65,11 @@ var ComgateClient = /** @class */ (function () {
         });
     }
     ComgateClient.prototype.callApi = function (request) {
-        var _a, _b, _c;
+        var _a, _b, _c, _d, _e;
         return __awaiter(this, void 0, void 0, function () {
             var options, res, error_1;
-            return __generator(this, function (_d) {
-                switch (_d.label) {
+            return __generator(this, function (_f) {
+                switch (_f.label) {
                     case 0:
                         options = {
                             method: request.method,
@@ -76,17 +77,17 @@ var ComgateClient = /** @class */ (function () {
                             params: request.query,
                             data: __assign({ secret: this.secret, merchant: this.merchant }, request.body),
                         };
-                        _d.label = 1;
+                        _f.label = 1;
                     case 1:
-                        _d.trys.push([1, 3, , 4]);
+                        _f.trys.push([1, 3, , 4]);
                         return [4 /*yield*/, this.axiosInstance(options)];
                     case 2:
-                        res = _d.sent();
-                        return [2 /*return*/, res.data];
+                        res = _f.sent();
+                        return [2 /*return*/, (0, parse_response_1.parseResponse)(options.url, res.data, res.status)];
                     case 3:
-                        error_1 = _d.sent();
+                        error_1 = _f.sent();
                         if (axios_1.default.isAxiosError(error_1)) {
-                            throw new Error("Error from Comgate API with status code ".concat((_a = error_1.response) === null || _a === void 0 ? void 0 : _a.status, ": ").concat((_c = (_b = error_1.response) === null || _b === void 0 ? void 0 : _b.data) === null || _c === void 0 ? void 0 : _c.message));
+                            throw new Error("Error from Comgate API with status code ".concat((_a = error_1.response) === null || _a === void 0 ? void 0 : _a.status, ": ").concat((_d = (_c = (_b = error_1.response) === null || _b === void 0 ? void 0 : _b.data) === null || _c === void 0 ? void 0 : _c.message) !== null && _d !== void 0 ? _d : (_e = error_1.response) === null || _e === void 0 ? void 0 : _e.statusText));
                         }
                         throw error_1;
                     case 4: return [2 /*return*/];

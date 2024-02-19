@@ -8,8 +8,9 @@ import { CapturePreAuthRequest, CapturePreAuthResponse } from "./types/endpoints
 import { CancelPreAuthRequest, CancelPreAuthResponse } from "./types/endpoints/cancelPreauth";
 import { MethodsBadRequestResponse, MethodsSuccessResponse, MethodsRequest } from "./types/endpoints/methods";
 import { StatusRequest, StatusResponse } from "./types/endpoints/status";
+import { URLEnum } from "./utils/parse-response";
 interface ApiRequest {
-    path: string;
+    path: URLEnum;
     method: HttpMethod;
     headers?: Record<string, string>;
     body?: Record<string, unknown>;

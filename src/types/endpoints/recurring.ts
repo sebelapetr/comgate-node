@@ -1,4 +1,5 @@
 // https://apidoc.comgate.cz/?lang=en#recurring
+
 export type RecurringRequest = {
     country?: RecurringCountry; // Country codes, defaults to 'CZ'.
     price: string; // Price of the product in cents or pennies. Must be min. 10 CZK (incl.), Max. unlimited.
