@@ -26,7 +26,10 @@ async function create(
             method: method,
             email: email,
             lang: lang,
-            prepareOnly: prepareOnly
+            prepareOnly: prepareOnly,
+            preauth: false,
+            initRecurring: false,
+            verification: false
         })
         console.log('Payment create response:', response);
     } catch (error) {

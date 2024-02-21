@@ -34,9 +34,9 @@ export type StatusResponseStatus =
     | 'AUTHORIZED' // the requested pre-authorization was successful
 
 export type StatusResponseCode =
-    0 // OK
-    | 1100 // unknown error
-    | 1200 // database error
-    | 1400 // wrong query
-    | 1500 // unexpected error
+    "0" // OK
+    | "1100" // unknown error
+    | "1200" // database error
+    | "1400" // wrong query
+    | "1500" // unexpected error
 ;
